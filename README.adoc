@@ -376,6 +376,10 @@ The recommended practice is to identify the referenced resource by means of a st
 |An optional override of the properties attribute for this document's item in the manifest.
 _Only applies to a chapter document._
 
+|epub3-frontmatterdir
+|The path to a directory that contains frontmatter files. The file names must match `front-matter*.html` and will be included in alphabetic order. The files are expected to be valid EPUB HTML files. _If only one front matter page is
+ required, the default 'front-matter.html' file can be used instead._
+
 |epub3-stylesdir
 |The path to a directory that contains alternate epub3.css and epub3-css3-only.css files to customize the look and feel.
 
@@ -387,11 +391,6 @@ The master document is assumed to be a book and each chapter an article.
 |Used to control the inclusion of special content in the generated HTML.
 If set to a value other than book, the byline information (author and avatar) is included below the chapter header.
 Suggested values include: book (default), anthology, magazine, journal, article.
-
-|fm-files
-|An array of file names (including paths) that will be included as EPUB front matter pages, in the sequence
-indicated by the array. The files are expected to be valid EPUB HTML files. _If only one front matter page is
- required, the default 'front-matter.html' file can be used instead._
 |===
 
 When using the EPUB3 converter, the `ebook-format` attribute resolves to the name of the ebook format being generated (epub3 or kf8) and the corresponding attribute `ebook-format-<name>` is defined, where `<name>` is `epub3` or `kf8`.

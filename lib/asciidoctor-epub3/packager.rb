@@ -190,14 +190,19 @@ body > svg {
     nil
   end
 
-
   def get_frontmatter_files doc
-    if doc.attr? 'fm-files'
-      fms = doc.attributes['fm-files']
-      if fms.is_a? Array
+    if doc.attr? 'epub3-frontmatterdir'
+      fmdir = doc.attr 'epub3-frontmatterdir'
+      fmglob = 'front-matter.*\.html'
+      unless Dir.exist? fmdir
+        warn %(Directory specified by 'epub3-frontmattderdir' doesn't exist! Ignoring ...)
+        return []
+      end
+      fms = Dir.entries(fmdir).delete_if {|x| !x.match fmglob}.sort.map {|y| File.join(fmdir,y)}
+      if fms && fms.length > 0
         fms
       else
-        warn %(Front matter attribute 'fm-files' must contain an Array! Ignoring ...)
+        warn %(Directory specified by 'epub3-frontmattderdir' contains no suitable files! Ignoring ...)
         []
       end
     elsif File.exist? 'front-matter.html'
